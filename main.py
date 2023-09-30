@@ -1,8 +1,10 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+"""
+A gameplay example (right), shows the first player starting 
+Connect Four by dropping one of their yellow discs into the center column of an empty game board. 
+The two players then alternate turns dropping one of their discs at a time into an unfilled column, 
+until the second player, with red discs, achieves a diagonal four in a row, and wins the game. 
+If the board fills up before either player achieves four in a row, then the game is a draw.
+"""
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
