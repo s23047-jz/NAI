@@ -1,4 +1,14 @@
 """
+Authors:
+    Jakub Żurawski: https://github.com/s23047-jz/connect_four
+    Mateusz Olstowski
+
+Rules:
+    https://en.wikipedia.org/wiki/Connect_Four
+    variant: PopOut
+"""
+
+"""
 A gameplay example (right), shows the first player starting 
 Connect Four by dropping one of their yellow discs into the center column of an empty game board. 
 The two players then alternate turns dropping one of their discs at a time into an unfilled column, 
