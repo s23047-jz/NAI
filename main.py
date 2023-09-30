@@ -1,3 +1,14 @@
+"""
+Authors:
+    Jakub Żurawski: https://github.com/s23047-jz/connect_four
+    Mateusz Olstowski
+
+Rules:
+    https://en.wikipedia.org/wiki/Connect_Four
+    variant: PopOut
+"""
+
+
 from classes.game import Game
 
 
