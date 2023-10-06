@@ -5,8 +5,8 @@ from easyAI.games import ConnectFour
 
 class Game(TwoPlayerGame):
     def __init__(self, players):
-        self.rows = 7
-        self.cols = 6
+        self.rows = 6
+        self.cols = 7
         self.players = players
         self.move_counter = 0
         self.board = self._create_board()
