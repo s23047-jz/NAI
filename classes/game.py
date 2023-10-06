@@ -8,6 +8,7 @@ class Game:
         self.x = x
         self.y = y
         self.board = self._create_board()
+        self.move_counter = 0
 
     def _valid_data(self, x: Any, y: Any):
         if not isinstance(x, int) or not isinstance(y, int):
@@ -15,6 +16,9 @@ class Game:
 
     def _create_board(self):
         return np.zeros((self.x, self.y), dtype=str)
+
+    def _valid_move(self, row):
+        return self.board[row, 0] == ''
 
     def place_piece(self, row: int, column: int):
         self.board[row, column] = 'x'
