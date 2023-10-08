@@ -40,7 +40,7 @@ class Game(TwoPlayerGame):
         """
         for pos, direction in self.pos_dir():
             streak = 0
-            while (0 <= pos[0] <= 5) and (0 <= pos[1] <= 6):
+            while (0 <= pos[0] < self.rows) and (0 <= pos[1] < self.cols):
                 if self.board[pos[0], pos[1]] == self._get_current_player_character(self.opponent_index):
                     streak += 1
                     if streak == 4:
@@ -64,9 +64,7 @@ class Game(TwoPlayerGame):
         :return:
         Returns an array of possible moves
         """
-        moves = [c for c in range(self.cols) if self.board[0][c] == '']
-        print('possible moves', moves)
-        return moves
+        return [c for c in range(self.cols) if self.board[0][c] == '']
 
     def make_move(self, column):
         """
