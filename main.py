@@ -34,9 +34,7 @@ Conclusions:
     Against the player, the AI first tries to fill the first row, but when it sees it
     the player is close to victory, he blocks the winning move.
 
-    So
-    I checked the algorithms responsible for learning.
-    They're not that complicated but the framework is called easy ai.
+    So,
     I believe that with more advanced algorithms the game would be much more difficult.
 
 """
