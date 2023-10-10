@@ -4,24 +4,29 @@ from easyAI import TwoPlayerGame
 
 class Game(TwoPlayerGame):
     def __init__(self, players):
-        self.rows = 6
-        self.cols = 7
+        self.__rows = 6
+        self.__cols = 7
         self.players = players
-        self.move_counter = 0
-        self.board = self._create_board()
+        self.__board = self._create_board()
         self.current_player = 1
 
     def _create_board(self):
         """
         Creates game board
-        """
-        return np.zeros((self.rows, self.cols), dtype=str)
 
-    def pos_dir(self):
+        Returns
+        -------
+            array: list - List of list with strings
         """
+        return np.zeros((self.__rows, self.__cols), dtype=str)
 
-        :return:
-            Returns an array of positions with a possibly found streak
+    def _pos_dir(self):
+        """
+        Returns an array of positions with a possibly found streak
+
+        Returns
+        -------
+            array: list - list of positions with a possibly found streak
         """
         # TODO try find another way
         return np.array(
@@ -35,13 +40,16 @@ class Game(TwoPlayerGame):
 
     def _find_four(self):
         """
-        :return:
-            Returns whether any player has a streak or not
+        Returns whether any player has a streak or not
+
+        Returns
+        -------
+            value: bool - Whether any player has a streak or not
         """
-        for pos, direction in self.pos_dir():
+        for pos, direction in self._pos_dir():
             streak = 0
-            while (0 <= pos[0] < self.rows) and (0 <= pos[1] < self.cols):
-                if self.board[pos[0], pos[1]] == self._get_current_player_character(self.opponent_index):
+            while (0 <= pos[0] < self.__rows) and (0 <= pos[1] < self.__cols):
+                if self.__board[pos[0], pos[1]] == self._get_current_player_character(self.opponent_index):
                     streak += 1
                     if streak == 4:
                         return True
@@ -52,36 +60,64 @@ class Game(TwoPlayerGame):
 
     def _get_current_player_character(self, player_index):
         """
-        :param:
+        Returns the current player's character
+
+        Parameters
+        ----------
             player_index: int - players id
-        :return:
-        Returns players character
+
+        Returns
+        -------
+            character: string - The current player's character
         """
         return 'O' if player_index == 2 else 'X'
 
     def possible_moves(self):
         """
-        :return:
         Returns an array of possible moves
+
+        Returns
+        -------
+            moves: list - list of possible moves
         """
-        return [c for c in range(self.cols) if self.board[0][c] == '']
+        return [c+1 for c in range(self.__cols) if self.__board[0][c] == '']
 
     def make_move(self, column):
         """
-        :param:
+        A method to make a move during the game
+
+        Parameters
+        ----------
             column: int - Selected column to input character
         """
-        row = max([r for r in range(self.rows) if self.board[r][column] == ''])
-        self.board[row][column] = self._get_current_player_character(self.current_player)
+        row = max([r for r in range(self.__rows) if self.__board[r][column-1] == ''])
+        self.__board[row][column-1] = self._get_current_player_character(self.current_player)
 
     def lose(self):
+        """
+        Returns value from find_four method
+
+        Returns
+        -------
+            value: bool - returned value from find_four method
+        """
         return self._find_four()
 
     def is_over(self):
+        """
+        Returns bool value whether the game is over or not
+
+        Returns
+        -------
+            value: bool - whether the game is over or not
+        """
         return len(self.possible_moves()) == 0 or self.lose()
 
     def scoring(self):
         return -100 if self.lose() else 0
 
     def show(self):
-        print(self.board)
+        """
+        Shows the board after each move
+        """
+        print(self.__board)

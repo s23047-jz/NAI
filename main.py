@@ -3,57 +3,50 @@ Authors:
     Jakub Żurawski: https://github.com/s23047-jz/connect_four
     Mateusz Olstowski
 
+-------------------------------
+
 Rules:
     https://en.wikipedia.org/wiki/Connect_Four
     variant: PopOut
+
+    Rules are easy. You must be the first who form a
+    horizontal, vertical, or diagonal line of four of one's own tokens.
+
+Run game:
+    To run the program you need python 3.
+    Install the required packages
+    and run main.py.
+    How to do this can be found in the README
+
+-------------------------------
+
+Conclusions:
+    (Jakub)
+    Bot_level (depth) - how many moves in advance should the AI think
+
+    AI vs AI
+    --------
+    Both artificial intelligences maintain a similar starting pattern,
+    they try to fill the first and second columns.
+
+    player vs AI
+    ------------
+    Against the player, the AI first tries to fill the first row, but when it sees it
+    the player is close to victory, he blocks the winning move.
+
+    So
+    I checked the algorithms responsible for learning.
+    They're not that complicated but the framework is called easy ai.
+    I believe that with more advanced algorithms the game would be much more difficult.
+
 """
 
-from easyAI import AI_Player, Human_Player, Negamax, SSS
-
-from classes.game import Game
-
-
-def create_players_opponent():
-    """
-    :return:
-    Returns selected bot as a player
-    """
-    bot_level = int(input("Input level of bot's depth: "))
-    bot_type = ''
-    while bot_type not in ['sss', 'neg']:
-        bot_type = input("Select bot type, 'sss' or 'neg': ")
-        if bot_type == 'sss':
-            sss_ai = SSS(bot_level)
-            player_2 = AI_Player(sss_ai)
-        elif bot_type == 'neg':
-            neg_ai = Negamax(bot_level)
-            player_2 = AI_Player(neg_ai)
-
-    return player_2
+from classes.create_game import CreateGame
 
 
 def main():
-    player_choice = ''
-    while (player_choice == '' or player_choice not in ['player', 'ai']):
-        player_choice = input(
-            "Please select game type, 'player' to play against AI, or 'ai' to watch game between two AIs: "
-        )
-
-    if player_choice == 'player':
-        player_1 = Human_Player()
-        player_2 = create_players_opponent()
-    elif player_choice == 'ai':
-        neg_ai = Negamax(5)
-        sss_ai = SSS(5)
-        player_1 = AI_Player(neg_ai)
-        player_2 = AI_Player(sss_ai)
-
-    game = Game([player_1, player_2])
-    game.play()
-    if game.lose():
-        print("Player %d wins." % (game.opponent_index))
-    else:
-        print("Looks like we have a draw.")
+    new_game = CreateGame()
+    new_game.start_game()
 
 
 if __name__ == '__main__':
