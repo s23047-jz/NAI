@@ -29,6 +29,7 @@ Use makefile
 or classic
 - ```python main.py```
 
+
 -----------------------------------------------------------------
 #### Play
 You can find the rules online. At the beginning, 
@@ -38,4 +39,4 @@ Remember that the movement selection range is from 1 to 7.
 The bot level that can be set is from 1 to 7.
 Have fun!
 
-![simplescreenrecorder-2023-10-10_21 15 08](https://github.com/s23047-jz/connect_four/assets/73025973/af63c7de-b420-44e8-a704-94a4e0d423c2)
+![2023-10-11_20-42-09](https://github.com/s23047-jz/connect_four/assets/76398414/e0568bbe-3ef7-46f7-a5b8-33db1628c6e5)
