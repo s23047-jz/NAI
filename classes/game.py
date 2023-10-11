@@ -8,6 +8,7 @@ class Game(TwoPlayerGame):
         self.__cols = 7
         self.players = players
         self.__board = self._create_board()
+        print(type(self.__board))
         self.current_player = 1
 
     def _create_board(self):
@@ -60,7 +61,7 @@ class Game(TwoPlayerGame):
                 pos = pos + direction
         return False
 
-    def _get_current_player_character(self, player_index):
+    def _get_current_player_character(self, player_index: int) -> str:
         """
         Returns the current player's character
 
@@ -100,7 +101,7 @@ class Game(TwoPlayerGame):
             self.current_player
         )
 
-    def lose(self):
+    def lose(self) -> bool:
         """
         Returns value from find_four method
 
@@ -125,7 +126,8 @@ class Game(TwoPlayerGame):
 
     def show(self):
         """
-        Shows the board after each move
+        Shows the board after each move,
+        and current possible moves
         """
         print(
             "\n".join(
