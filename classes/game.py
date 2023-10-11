@@ -19,6 +19,7 @@ class Game(TwoPlayerGame):
         -------
             array: list - List of list with strings
         """
+
         return np.zeros((self.__rows, self.__cols), dtype=str)
 
     def _pos_dir(self):
@@ -136,7 +137,7 @@ class Game(TwoPlayerGame):
         print(
             "\n".join(
                 [
-                    " ".join([str(x) for x in range(1, self.__cols + 2)]),
+                    " ".join([str(x) for x in range(1, self.__cols + 1)]),
                     (2 * self.__cols + 1) * "-",
                 ]
                 + [
