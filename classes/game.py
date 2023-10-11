@@ -30,12 +30,12 @@ class Game(TwoPlayerGame):
         """
         # TODO try find another way
         return np.array(
-        [[[i, 0], [0, 1]] for i in range(6)]
-        + [[[0, i], [1, 0]] for i in range(7)]
-        + [[[i, 0], [1, 1]] for i in range(1, 3)]
-        + [[[0, i], [1, 1]] for i in range(4)]
-        + [[[i, 6], [1, -1]] for i in range(1, 3)]
-        + [[[0, i], [1, -1]] for i in range(3, 7)]
+            [[[i, 0], [0, 1]] for i in range(6)]
+            + [[[0, i], [1, 0]] for i in range(7)]
+            + [[[i, 0], [1, 1]] for i in range(1, 3)]
+            + [[[0, i], [1, 1]] for i in range(4)]
+            + [[[i, 6], [1, -1]] for i in range(1, 3)]
+            + [[[0, i], [1, -1]] for i in range(3, 7)]
         )
 
     def _find_four(self):
@@ -49,7 +49,9 @@ class Game(TwoPlayerGame):
         for pos, direction in self._pos_dir():
             streak = 0
             while (0 <= pos[0] < self.__rows) and (0 <= pos[1] < self.__cols):
-                if self.__board[pos[0], pos[1]] == self._get_current_player_character(self.opponent_index):
+                if self.__board[pos[0], pos[1]] == self._get_current_player_character(
+                    self.opponent_index
+                ):
                     streak += 1
                     if streak == 4:
                         return True
@@ -70,7 +72,7 @@ class Game(TwoPlayerGame):
         -------
             character: string - The current player's character
         """
-        return 'O' if player_index == 2 else 'X'
+        return "O" if player_index == 2 else "X"
 
     def possible_moves(self):
         """
@@ -80,9 +82,9 @@ class Game(TwoPlayerGame):
         -------
             moves: list - list of possible moves
         """
-        return [c+1 for c in range(self.__cols) if self.__board[0][c] == '']
+        return [c + 1 for c in range(self.__cols) if self.__board[0][c] == ""]
 
-    def make_move(self, column):
+    def make_move(self, column: int):
         """
         A method to make a move during the game
 
@@ -90,8 +92,13 @@ class Game(TwoPlayerGame):
         ----------
             column: int - Selected column to input character
         """
-        row = max([r for r in range(self.__rows) if self.__board[r][column-1] == ''])
-        self.__board[row][column-1] = self._get_current_player_character(self.current_player)
+
+        row: int = max(
+            [r for r in range(self.__rows) if self.__board[r][column - 1] == ""]
+        )
+        self.__board[row][column - 1] = self._get_current_player_character(
+            self.current_player
+        )
 
     def lose(self):
         """
@@ -120,4 +127,21 @@ class Game(TwoPlayerGame):
         """
         Shows the board after each move
         """
-        print(self.__board)
+        print(
+            "\n".join(
+                [
+                    " ".join([str(x) for x in range(1, self.__cols + 2)]),
+                    (2 * self.__cols + 1) * "-",
+                ]
+                + [
+                    " ".join([col if len(col) else "." for col in row])
+                    for row in self.__board
+                ]
+            ),
+            "\n\n",
+        )
+
+        print(
+            "Possible moves for current player: ",
+            ", ".join(map(str, self.possible_moves())),
+        )
