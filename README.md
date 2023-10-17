@@ -1,4 +1,4 @@
-# Connect four the game
+# Air pollution with fuzzy logic
 
 ## Setup
 
@@ -28,15 +28,3 @@ Use makefile
 
 or classic
 - ```python main.py```
-
-
------------------------------------------------------------------
-#### Play
-You can find the rules online. At the beginning, 
-the program asked if we wanted to play or if we wanted 
-to watch the duel between the two ai's. Follow the instructions.
-Remember that the movement selection range is from 1 to 7.
-The bot level that can be set is from 1 to 7.
-Have fun!
-
-![2023-10-11_20-42-09](https://github.com/s23047-jz/connect_four/assets/76398414/e0568bbe-3ef7-46f7-a5b8-33db1628c6e5)
