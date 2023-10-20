@@ -4,9 +4,12 @@ Authors:
     Mateusz Olstowski: https://github.com/Matieus/connect_four
 """
 
+from classes.air_pollution import AirPollution
+
 
 def main():
-    print("Hello fuzzy logic")
+    air_pollution = AirPollution()
+    air_pollution.show()
 
 
 if __name__ == "__main__":
