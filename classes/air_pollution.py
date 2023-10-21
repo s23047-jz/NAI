@@ -3,6 +3,8 @@ import skfuzzy as fuzz
 from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 
+from classes.city import City
+
 
 air_pollution_dict = {
 	"pm10": {
@@ -49,8 +51,8 @@ air_pollution_dict = {
 
 
 class AirPollution:
-	def __init__(self, compare_to_api=False):
-		self.__compare_to_api = compare_to_api
+	def __init__(self, city: City):
+		self.__city = city
 		self.__antecedents = {}
 		self.__mixture_of_air_particles = {
 			"pm10": [0, 250],
@@ -59,8 +61,9 @@ class AirPollution:
 			"no2": [0, 500],
 			"so2": [0, 600]
 		}
+		self.initialise()
 
-	def _create_antecedent(self, param_name, universe_range):
+	def _create_antecedent(self, param_name: str, universe_range: np.arange):
 		self.__antecedents[param_name] = ctrl.Antecedent(universe_range, param_name)
 
 	def _setup(self):
@@ -75,6 +78,10 @@ class AirPollution:
 				self.__antecedents[key][apl] = fuzz.trimf(
 					self.__antecedents[key].universe, air_pollution_dict[key][apl]
 				)
+
+	def initialise(self):
+		self._setup()
+		self.show()
 
 	def show(self):
 		self._setup()
