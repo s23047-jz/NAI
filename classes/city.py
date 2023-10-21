@@ -30,19 +30,19 @@ class City:
 	def __init__(self, get_data_from_api: bool = False, city_index: int = 1):
 		self.__get_data_from_api = get_data_from_api
 		self.__city_index = city_index
-		self.__name = 'Test'
-		self.__pm10 = 0
-		self.__pm25 = 0
-		self.__o3 = 0
-		self.__no2 = 0
-		self.__so2 = 0
+		self.name = 'Test'
+		self.pm10 = 0
+		self.pm25 = 0
+		self.o3 = 0
+		self.no2 = 0
+		self.so2 = 0
 
 	def _set_city_value(
 		self,
 		key: str,
 		value: float
 	):
-		setattr(self, f'__{key}', value)
+		setattr(self, key, value)
 
 	def _get_all_cities(self):
 		try:
@@ -108,13 +108,13 @@ class City:
 
 	def to_dict(self):
 		return {
-			"name": self.__name,
-			"pm10": self.__pm10,
-			"pm25": self.__pm25,
-			"o3": self.__o3,
-			"no2": self.__no2,
-			"so2": self.__so2
+			"name": self.name,
+			"pm10": self.pm10,
+			"pm25": self.pm25,
+			"o3": self.o3,
+			"no2": self.no2,
+			"so2": self.so2
 		}
 
 	def show(self):
-		self.to_dict()
+		print(self.to_dict())
