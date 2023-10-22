@@ -1,6 +1,6 @@
 # Air pollution with fuzzy logic
 
-used API: [API](https://powietrze.gios.gov.pl/pjp/current#)
+used API: [Powietrze_Gios](https://powietrze.gios.gov.pl/pjp/current#)
 
 ## Setup
 
