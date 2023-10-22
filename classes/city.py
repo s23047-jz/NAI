@@ -78,7 +78,21 @@ class City:
 			r = requests.get(GIOS_ENDPOINTS['all'])
 			data = r.json()
 
-			city = data[self.__city_index]
+			index = None
+
+			# This is for test to find and test each air quality
+			# print("CITIES\n", data)
+			# for i, item in enumerate(data):
+			# 	print(item)
+			# 	if item['id'] == 740:
+			# 		index = i
+			# 		break
+			#
+			# print(f"INDEX {index}")
+
+			if not index:
+				index = self.__city_index
+			city = data[index]
 			self.__name = city['city']['name']
 
 			self._get_city_data(city['id'])
