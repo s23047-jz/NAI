@@ -1,4 +1,4 @@
-![image](https://github.com/s23047-jz/NAI/assets/73025973/00799bb4-1117-438a-abe7-d2befafa9560)# Air pollution with fuzzy logic
+# Air pollution with fuzzy logic
 
 ## Setup
 
