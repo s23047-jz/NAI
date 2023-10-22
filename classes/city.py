@@ -80,7 +80,8 @@ class City:
 
 			index = None
 
-			# This is for test to find and test each air quality
+			# This is only for test to find and test each air quality
+
 			# print("CITIES\n", data)
 			# for i, item in enumerate(data):
 			# 	print(item)
@@ -94,6 +95,8 @@ class City:
 				index = self.__city_index
 			city = data[index]
 			self.__name = city['city']['name']
+
+			print(f"Testing for {self.__name}")
 
 			self._get_city_data(city['id'])
 
@@ -132,11 +135,16 @@ class City:
 				f"{GIOS_ENDPOINTS['air_particles']}/{id}"
 			)
 			data = r.json()
+			latest_value = data['values'][0]['value']
+			if latest_value is None:
+				index = 1
+				while latest_value is None:
+					latest_value = data['values'][index]['value']
+					index += 1
 
-			# data['values'][0]['value'] => latest value
 			self._set_city_value(
 				key=data['key'].lower(),
-				value=data['values'][0]['value']
+				value=latest_value
 			)
 		except Exception as e:
 			print(f"Something went wrong: {str(e)}")
