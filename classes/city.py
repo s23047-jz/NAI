@@ -16,6 +16,16 @@ def create_dict_for_city(
 	no2: float,
 	so2: float
 ):
+	"""
+	Parameters
+	----------
+	name: str - name of the city
+	pm10, pm25, o3, no2, so2: float - air particles mixture, cannot be set to 0 because the algorithm has set errors
+
+	Returns
+	-------
+	city_dict: dict - ready dict to create custom city
+	"""
 	return {
 		"name": name,
 		"pm10": pm10,
@@ -27,24 +37,43 @@ def create_dict_for_city(
 
 
 class City:
+	"""
+	Parameters
+	----------
+	get_data_from_api: bool - should get data from api or not
+	city_index: int - index of the city in the array, needed only if get_data_from_api is true
+	name: str - name of the city
+	pm10, pm25, o3, no2, so2: float - air particles mixture, cannot be set to 0 because the algorithm has set errors
+	"""
 	def __init__(self, get_data_from_api: bool = False, city_index: int = 1):
 		self.__get_data_from_api = get_data_from_api
 		self.__city_index = city_index
 		self.name = 'Test'
-		self.pm10 = 0
-		self.pm25 = 0
-		self.o3 = 0
-		self.no2 = 0
-		self.so2 = 0
+		self.pm10 = 0.1
+		self.pm25 = 0.1
+		self.o3 = 0.1
+		self.no2 = 0.1
+		self.so2 = 0.1
 
 	def _set_city_value(
 		self,
 		key: str,
 		value: float
 	):
+		"""
+		Sets new values for the city
+
+		Parameters
+		----------
+		key: str - attribute name
+		value: float - attribute value
+		"""
 		setattr(self, key, value)
 
 	def _get_all_cities(self):
+		"""
+		Gets all cities from api and select one from passed city_index
+		"""
 		try:
 			r = requests.get(GIOS_ENDPOINTS['all'])
 			data = r.json()
@@ -58,6 +87,13 @@ class City:
 			print(f"Something went wrong: {str(e)}")
 
 	def _get_city_data(self, id: int):
+		"""
+		Gets air particles mixture for selected city
+
+		Parameters
+		----------
+		id: int - id of the selected city
+		"""
 		try:
 			r = requests.get(
 				f"{GIOS_ENDPOINTS['index']}/{id}"
@@ -70,6 +106,13 @@ class City:
 			print(f"Something went wrong: {str(e)}")
 
 	def _get_air_particles(self, id: int):
+		"""
+		Gets the latest value of particle
+
+		Parameters
+		----------
+		id: int - id of the selected city
+		"""
 		try:
 			r = requests.get(
 				f"{GIOS_ENDPOINTS['air_particles']}/{id}"
@@ -88,6 +131,13 @@ class City:
 		self._get_all_cities()
 
 	def _create_custom_city(self, dict_of_values: dict):
+		"""
+		Sets values for the city from passed dict
+
+		Parameters
+		----------
+		dict_of_values: dict - dict of the city keys and values
+		"""
 		city_keys = ["name", "pm10", "pm25", "o3", "no2", "so2"]
 		for city_key in city_keys:
 			if city_key in dict_of_values.keys():
@@ -99,6 +149,13 @@ class City:
 					)
 
 	def initialise(self, dict_of_values: dict = None):
+		"""
+		Initialise gets data from api for create city from dict
+		Parameters
+		----------
+		dict_of_values: dict - dict of the city keys and values
+		"""
+
 		if self.__get_data_from_api:
 			self._get_data_from_api()
 		elif not self.__get_data_from_api and dict_of_values is not None:
@@ -107,6 +164,14 @@ class City:
 			print("Nothing happened")
 
 	def to_dict(self):
+
+		"""
+		Returns city as a dict
+
+		Returns
+		----------
+		returns city as dict
+		"""
 		return {
 			"name": self.name,
 			"pm10": self.pm10,
@@ -117,4 +182,7 @@ class City:
 		}
 
 	def show(self):
+		"""
+		Shows city values
+		"""
 		print(self.to_dict())

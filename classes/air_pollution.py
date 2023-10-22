@@ -62,6 +62,18 @@ air_quality_dict = {
 
 
 class CityAirQuality:
+	"""
+	Parameters
+	----------
+	city: city - Created a city according to the City class
+
+	Variables
+	---------
+	antecedents: dict - Dict of antecedents for each air particle
+	consequent_dict: dict - Dict of consequent for each air particle
+	mixture_of_air_particles: dict - Dict of air particle compartments
+	air_quality_levels: array - Array of air quality levels
+	"""
 	def __init__(self, city: City):
 		self.__city = city
 		self.__antecedents = {}
@@ -79,9 +91,21 @@ class CityAirQuality:
 		self.initialise()
 
 	def _create_antecedent(self, param_name: str, universe_range: np.arange):
+		"""
+		Sets antecedent for air particle
+
+		Parameters
+		----------
+		param_name: str - name of variable / air particle
+		universe_range: np.arange - compartments for air particle
+		"""
 		self.__antecedents[param_name] = ctrl.Antecedent(universe_range, param_name)
 
 	def _setup(self):
+		"""
+		Creates whole setup for fuzzy logic, create antecedent and sets
+					compartments for each air particle
+		"""
 
 		for param_name, range_values in self.__mixture_of_air_particles.items():
 			self._create_antecedent(param_name, np.arange(range_values[0], range_values[1] + 1, 1))
@@ -93,6 +117,9 @@ class CityAirQuality:
 				)
 
 	def _create_consequent(self):
+		"""
+		Creates consequents for each air particle
+		"""
 		for key in self.__mixture_of_air_particles.keys():
 			cons = ctrl.Consequent(np.arange(0, 601, 1), key)
 			for aql in self.__air_quality_levels:
@@ -102,13 +129,50 @@ class CityAirQuality:
 			self.__consequent_dict[key] = cons
 
 	def _determine_air_quality(self, output_value, variable_name):
+		"""
+		Returns air quality for the result
+
+		Parameters
+		----------
+		output_value: float - result output
+		variable_name: string - name of the variable (air particle)
+
+		Returns
+		-------
+		level: string - current air quality for the result
+		"""
 		air_quality_levels = air_pollution_dict.get(variable_name, {})
 
 		for level, (low, mid, high) in air_quality_levels.items():
 			if low <= output_value <= high:
 				return level
 
+	def _get_worst_air_quality(self, city_air_quality_arr):
+		"""
+		Returns the worst air quality
+
+		Parameters
+		----------
+		city_air_quality_arr: arr - Array of airs quality
+
+		Returns
+		-------
+		worst_air_quality: string - the worst air quality from all results for the city
+		"""
+
+		air_quality_values_arr = [air_quality_dict[level] for level in city_air_quality_arr]
+
+		worst_air_quality_value = max(air_quality_values_arr)
+		inverse_air_quality_values = {v: k for k, v in air_quality_dict.items()}
+		worst_air_quality = inverse_air_quality_values[worst_air_quality_value]
+
+		return worst_air_quality
+
 	def _evaluate_air_quality(self):
+		"""
+		Creates rules for each antecedent and compartments, and shows
+				air quality for the city
+		"""
 		self._create_consequent()
 		results_dict = {}
 
@@ -122,32 +186,31 @@ class CityAirQuality:
 			result.input[key] = self.__city.to_dict()[key]
 			results_dict[key] = result
 
-		city_air_quality_arr = []
+		city_air_quality_arr = set()
 		for key in self.__mixture_of_air_particles.keys():
 			result = results_dict[key]
 			result.compute()
-			city_air_quality_arr.append(
+			city_air_quality_arr.add(
 				self._determine_air_quality(result.output[key], key)
 			)
 			self.__consequent_dict[key].view(sim=result)
 
-		# TODO finish get air quality
-		city_air_quality_dict = {
-			air_quality_dict[key]
-			for key in city_air_quality_arr
-		}
-
-
-
+		air_quality = self._get_worst_air_quality(city_air_quality_arr)
+		print(f"{self.__city.name} has '{air_quality}' air quality")
 
 	def show(self):
-		self._setup()
+		"""
+		Shows all antecedents
+		"""
 		for param_name, antecedent in self.__antecedents.items():
 			antecedent.view()
 
 		plt.show()
 
 	def initialise(self):
+		"""
+		Initialise fuzzy logic and check air quality for the city
+		"""
 		self._setup()
-		# self.show()
+		self.show()
 		self._evaluate_air_quality()
