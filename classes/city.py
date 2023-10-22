@@ -80,11 +80,11 @@ class City:
 
 			index = None
 
-			# This is only for test to find and test each air quality
+			# This is only
+			# for test to find and test each air quality
 
 			# print("CITIES\n", data)
 			# for i, item in enumerate(data):
-			# 	print(item)
 			# 	if item['id'] == 740:
 			# 		index = i
 			# 		break
@@ -142,8 +142,12 @@ class City:
 					latest_value = data['values'][index]['value']
 					index += 1
 
+			key = data['key'].lower()
+			if key == 'pm2.5':
+				key = 'pm25'
+
 			self._set_city_value(
-				key=data['key'].lower(),
+				key=key,
 				value=latest_value
 			)
 		except Exception as e:

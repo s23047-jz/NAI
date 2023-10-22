@@ -3,6 +3,7 @@ Authors:
     Jakub Żurawski: https://github.com/s23047-jz/NAI/tree/air-pollution
     Mateusz Olstowski: https://github.com/Matieus/connect_four
 
+used api: https://powietrze.gios.gov.pl/pjp/current#
 
 Conclusions:
 (Jakub)
@@ -11,9 +12,9 @@ Conclusions:
 
     Unfortunately the API was not conducive to the topic of fuzzy logic.
     You need to make a result for each air particle and then check the air quality.
+
     The worst idea, but still accepted, was to create rules for every possible scheme.
-
-
+    But I decided to do it in another way
 """
 
 from classes.air_pollution import CityAirQuality
