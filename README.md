@@ -41,4 +41,4 @@ or classic
 
 ![image](https://github.com/s23047-jz/NAI/assets/76398414/54088bb4-4023-4a26-98f6-fb9720ff55f5)
 ![image](https://github.com/s23047-jz/NAI/assets/76398414/fb51eb57-85da-4c95-963d-00913a8c04d1)
-
+![image](https://github.com/s23047-jz/NAI/assets/76398414/53cdf753-e901-4fd2-a21d-01878c48e1f3)
