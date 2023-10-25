@@ -60,7 +60,6 @@ class CityAirQuality:
     Variables
     ---------
     antecedents: dict - Dict of antecedents for each air particle
-    consequent_dict: dict - Dict of consequent for each air particle
     mixture_of_air_particles: dict - Dict of air particle compartments
     air_quality_levels: array - Array of air quality levels
     air_quality_levels_range: list - List of ranges for each air quality level
@@ -70,7 +69,6 @@ class CityAirQuality:
     def __init__(self, city: City):
         self.__city = city
         self.__antecedents = {}
-        self.__consequent_dict = {}
         self.__mixture_of_air_particles = {
             "pm10": [0, 250],
             "pm25": [0, 200],
