@@ -59,7 +59,7 @@ class City:
 	def _set_city_value(
 		self,
 		key: str,
-		value: float
+		value: [float, str]
 	):
 		"""
 		Sets new values for the city
@@ -67,7 +67,7 @@ class City:
 		Parameters
 		----------
 		key: str - attribute name
-		value: float - attribute value
+		value: float, str - attribute value
 		"""
 		setattr(self, key, value)
 
@@ -95,9 +95,8 @@ class City:
 			if not index:
 				index = self.__city_index
 			city = data[index]
-			self.__name = city['city']['name']
-
-			print(f"Testing for {self.__name}")
+			self._set_city_value('name', city['city']['name'])
+			print(f"Testing for {self.name}")
 
 			self._get_city_data(city['id'])
 
@@ -136,6 +135,7 @@ class City:
 				f"{GIOS_ENDPOINTS['air_particles']}/{id}"
 			)
 			data = r.json()
+			print('data', data)
 			latest_value = data['values'][0]['value']
 			if latest_value is None:
 				index = 1
@@ -169,7 +169,7 @@ class City:
 		for city_key in city_keys:
 			if city_key in dict_of_values.keys():
 				if city_key == 'name':
-					self.__name = dict_of_values['name']
+					self.name = dict_of_values['name']
 				else:
 					self._set_city_value(
 						key=city_key, value=float(dict_of_values[city_key])
