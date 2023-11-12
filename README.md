@@ -31,3 +31,6 @@ or classic
 
 -----------------------------------------------------------------
 #### Select the name of one of the users from movie_data and pass it to the MovieEngine class. That's all.
+
+![image](https://github.com/s23047-jz/NAI/assets/73025973/cceffee0-7602-4cb8-9c30-18460aa88b54)
+![image](https://github.com/s23047-jz/NAI/assets/73025973/341c0756-fcbd-474d-a845-ef49372839da)
