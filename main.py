@@ -2,6 +2,7 @@
 Authors:
     Jakub Żurawski: https://github.com/s23047-jz/NAI/
 
+    Select the name of one of the users from movie_data and pass it to the MovieEngine class. That's all.
 """
 import os
 import json
