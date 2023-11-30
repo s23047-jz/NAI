@@ -1,5 +1,4 @@
-# Movie recommendation engine
-
+# Data Classificator
 ## Setup
 
 -----------------------------------------------------------------
@@ -30,7 +29,10 @@ or classic
 - ```python main.py```
 
 -----------------------------------------------------------------
-#### Select the name of one of the users from movie_data and pass it to the MovieEngine class. That's all.
+#### Output
 
-![image](https://github.com/s23047-jz/NAI/assets/73025973/cceffee0-7602-4cb8-9c30-18460aa88b54)
-![image](https://github.com/s23047-jz/NAI/assets/73025973/341c0756-fcbd-474d-a845-ef49372839da)
+![Zrzut ekranu 2023-11-30 102443](https://github.com/Matieus/NAI/assets/76398414/598f0b5b-3898-426d-83fc-7194ea2883d0)
+
+![Zrzut ekranu 2023-11-30 102520](https://github.com/Matieus/NAI/assets/76398414/ab32cf1a-3fad-46a0-aad0-6c764b36e688)
+
+![Zrzut ekranu 2023-11-30 102536](https://github.com/Matieus/NAI/assets/76398414/3797cc0c-4b07-4a7c-a9d9-8b31ae2553e9)
