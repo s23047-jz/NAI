@@ -175,11 +175,11 @@ class HandGesture:
 
 
 def main():
-	fd = FaceDetector()
-	fd.start()
+	# fd = FaceDetector()
+	# fd.start()
 
-	# hg = HandGesture()
-	# hg.start()
+	hg = HandGesture()
+	hg.start()
 
 
 if __name__ == '__main__':
